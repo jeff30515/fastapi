@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info Page</title>
+</head>
+<body>
+    <h2>留言系統</h2>
+    <div>
+        姓名<input type="text" id = "name"/>
+        內容<input type="test" id = "content"/>
+        <button onclick="postMessage();">送出</button>
+    </div>
+    <hr/>
+    <div id = "board"></div>
+    <button onclick=" postMessage();">Post Message</button>
+    <button onclick=" getMessage();">Get Message</button>
+    <button onclick=" deleteMessage();">Delete Message</button>
+    <script>
+        async function postMessage(){
+            let name = document.querySelector("#name").value;
+            let content = document.querySelector("#content").value;
+            let response = await fetch("/api/message", {
+                method: "POST",
+                body: JSON.stringify({"author":name, "content": content}),
+            });
+            let data = await response.json();
+            if(data.ok){
+                getMessage();
+            }
+        }
+        async function getMessage(){
+            let response = await fetch("/api/message", {
+                method: "GET",
+            });
+            let data = await response.json();
+            let board = document.querySelector("#board");
+            board.innerHTML="";
+            for(let i=0;i<data.length;i++){
+                board.innerHTML += "<div>"+
+                    data[i].author+": "+data[i].content+
+                    "<button onclick='deleteMessage("+data[i].id+")'>X</button>"+
+                    "</div>";
+            }
+
+        }
+        async function deleteMessage(id){
+            let response =await fetch("/api/message/"+id,{method:"Delete"});
+            let data = await response.json();
+            if(data.ok){
+                getMessage();
+            }
+        }
+        getMessage();
+    </script>
+    

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+</html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Info Page</title>
+</head>
+<body>
+    <h1>This is baibai page</h1>
+    <a href="/test">Go to test Page</a>
+    <button onclick="postData();">Send POST Request to /test</button>
+    <script>
+        async function postData() { 
+            let response = await fetch("/test", {
+                method: "POST",
+                body: JSON.stringify({"x": 42}),
+            });
+            let data = await response.json();
+            console.log(data);
+}
+    </script>
+    <p>Welcome to the baibai page of our FastAPI application.</p>
+    <a href="/info">Go to Info Page</a>
+    <form action="http://127.0.0.1:500/multiply" method="get">
+        <label for="number">Enter two number (between -10 and 10):</label>
+        <input type="number" id="number" name="a" min="-10" max="10" required>
+        <input type="number" id="number" name="b" min="-10" max="10" required>
+        <button type="submit">multiply</button>
+    </form>
+    <div>
+        <h2>另外一個網頁</h2>
+        <a href="page.html">Another Page</a>
+    </div>
+    <img src="/baibai"/>
+</body>
+</html>
