@@ -9,13 +9,6 @@ from starlette.middleware.sessions import SessionMiddleware
 app =FastAPI()
 app.add_middleware(SessionMiddleware,secret_key="123")
 
-
-con = mysql.connector.connect(
-    user="root",
-    password="anny880618",
-    host="127.0.0.1",
-    database="fastapi"
-)
 @app.post("/api/member")
 def signup(body = Body(None)): 
     body = json.loads(body)
