@@ -10,13 +10,6 @@ app = FastAPI()
 def root():
     return ("hello world")
 
-con = mysql.connector.connect(
-    user="root",
-    password="anny880618",
-    host="127.0.0.1",
-    database="mydb"
-)
-
 print("資料庫連線成功")
 cursor = con.cursor()
 productname = "拿鐵咖啡"
