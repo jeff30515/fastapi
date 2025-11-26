@@ -5,12 +5,6 @@ from fastapi.staticfiles import StaticFiles
 from fastapi import Body
 import json
 import mysql.connector
-con = mysql.connector.connect(
-    user="root",
-    password="anny880618",
-    host="127.0.0.1",
-    database="fastapi"
-)
 app = FastAPI()
 
 @app.post("/api/message")
